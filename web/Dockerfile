@@ -1,3 +1,4 @@
 FROM nginx
 
-copy nuforc-web/dist /usr/share/nginx/html
+COPY nuforc-web/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/nginx.conf

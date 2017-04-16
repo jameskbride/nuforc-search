@@ -31,4 +31,4 @@ curl -X PUT -H "Content-Type: application/json" -H "Cache-Control: no-cache" -H 
 			}
 		}
 	}
-}' "http://localhost:9200/encounters"
+}' "http://localhost:8080/encounters"

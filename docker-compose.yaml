@@ -1,0 +1,27 @@
+version: '2'
+
+services:
+
+  elasticsearch:
+    container_name: nuforc-elasticsearch
+    image: jameskbride/elasticsearch
+    volumes:
+      - ./esdata:/usr/share/elasticsearch/data
+    build:
+      context: .
+      dockerfile: elasticsearch/Dockerfile
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+
+  web:
+    container_name: nuforc-nginx
+    image: jameskbride/nuforc-web-nginx
+    build:
+      context: .
+      dockerfile: web/Dockerfile
+    ports:
+      - "80:80"
+      - "8080:8080"
+    links:
+      - elasticsearch
