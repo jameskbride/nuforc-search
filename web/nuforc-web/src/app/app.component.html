@@ -1,3 +1,11 @@
 <h1>
   {{title}}
 </h1>
+<input #searchBox id="search-box" /><span (click)="search(searchBox.value)" >Search</span>
+<div>
+  <div *ngFor="let nuforcEncounter of nuforcEncounters | async"
+       class="search-result" >
+    {{nuforcEncounter}}
+  </div>
+</div>
+
