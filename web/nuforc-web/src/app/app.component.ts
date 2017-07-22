@@ -15,6 +15,6 @@ export class AppComponent {
   title = 'app sort of works!';
 
   search(queryString : String): void {
-    this.encounters = this.nuforcSearchService.search(queryString);
+    this.nuforcSearchService.search(queryString).then(nuforcEcounters => this.encounters = nuforcEcounters);
   }
 }

@@ -5,7 +5,8 @@
 <div>
   <div *ngFor="let encounter of encounters"
        class="search-result" >
-    {{encounter}}
+    {{ encounter.date_time }}
+    {{ encounter.summary }}
   </div>
 </div>
 
