@@ -1,7 +1,6 @@
 version: '2'
 
 services:
-
   elasticsearch:
     container_name: nuforc-elasticsearch
     image: jameskbride/elasticsearch
@@ -12,6 +11,8 @@ services:
     ports:
       - "9200:9200"
       - "9300:9300"
+    networks:
+      - back
 
   web:
     container_name: nuforc-nginx
@@ -23,5 +24,14 @@ services:
     ports:
       - "80:80"
       - "8080:8080"
-    links:
-      - elasticsearch
+    networks:
+      - front
+      - back
+
+networks:
+  front:
+    # Use a custom driver
+    driver: bridge
+  back:
+    # Use a custom driver
+    driver: bridge
