@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import {NuforcSearchService } from './nuforc-search.service';
 import 'rxjs/add/operator/toPromise';
-import {NuforcEncounter} from "./nuforc-encounter";
+import {HitResult} from "./hit-result";
+import {SearchResult} from "./search-result";
 
 @Component({
   selector: 'app-root',
@@ -9,12 +10,15 @@ import {NuforcEncounter} from "./nuforc-encounter";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  encounters: NuforcEncounter[];
+  encounters: HitResult[];
 
   constructor(private nuforcSearchService: NuforcSearchService) {}
   title = 'app sort of works!';
 
+
   search(queryString : String): void {
-    this.nuforcSearchService.search(queryString).then(nuforcEcounters => this.encounters = nuforcEcounters);
+    this.nuforcSearchService.search(queryString).subscribe((res) => {
+      this.encounters = res.hits.hits;
+    });
   }
 }
