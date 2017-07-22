@@ -1,21 +1,20 @@
 import { Component } from '@angular/core';
-import {SearchService } from './search.service';
+import {NuforcSearchService } from './nuforc-search.service';
 import 'rxjs/add/operator/toPromise';
-import {NuforcEncounter} from "./nuforcEncounter";
+import {NuforcEncounter} from "./nuforc-encounter";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
-  providers: [SearchService]
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  encounters: NuforcEncounter[];
 
-  constructor(private searchService: SearchService) {}
-  title = 'app works!';
-  nuforcEncounters: NuforcEncounter[];
+  constructor(private nuforcSearchService: NuforcSearchService) {}
+  title = 'app sort of works!';
 
   search(queryString : String): void {
-    this.searchService.search(queryString).then(nuforcEncounters => this.nuforcEncounters = nuforcEncounters);
+    this.encounters = this.nuforcSearchService.search(queryString);
   }
 }

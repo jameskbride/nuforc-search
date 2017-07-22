@@ -16,6 +16,8 @@ services:
   web:
     container_name: nuforc-nginx
     image: jameskbride/nuforc-web-nginx
+    volumes:
+      - ./web/nuforc-web/staging:/usr/share/nginx/html
     build:
       context: ./web
     ports:

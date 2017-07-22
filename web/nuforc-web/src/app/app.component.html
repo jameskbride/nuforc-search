@@ -3,9 +3,9 @@
 </h1>
 <input #searchBox id="search-box" /><span (click)="search(searchBox.value)" >Search</span>
 <div>
-  <div *ngFor="let nuforcEncounter of nuforcEncounters | async"
+  <div *ngFor="let encounter of encounters"
        class="search-result" >
-    {{nuforcEncounter}}
+    {{encounter}}
   </div>
 </div>
 
