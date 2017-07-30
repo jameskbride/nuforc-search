@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import {NuforcSearchService } from './nuforc-search.service';
 import 'rxjs/add/operator/toPromise';
 import {HitResult} from "./hit-result";
-import {SearchResult} from "./search-result";
 
 @Component({
   selector: 'app-root',
@@ -16,7 +15,7 @@ export class AppComponent {
   title = 'app sort of works!';
 
 
-  search(queryString : String): void {
+  search(queryString : string): void {
     this.nuforcSearchService.search(queryString).subscribe((res) => {
       this.encounters = res.hits.hits;
     });
