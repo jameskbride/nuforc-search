@@ -2,17 +2,13 @@ version: '2'
 
 services:
   elasticsearch:
-    container_name: nuforc-elasticsearch
-    image: jameskbride/elasticsearch
-    volumes:
-      - ./esdata:/usr/share/elasticsearch/data
-    build:
-      context: ./elasticsearch
+    container_name: mock-elasticsearch
+    image: jamesdbloom/mockserver
     ports:
       - "9200:9200"
-      - "9300:9300"
     networks:
       - back
+    command: /opt/mockserver/run_mockserver.sh -logLevel INFO -serverPort 9200
 
   web:
     container_name: nuforc-nginx
