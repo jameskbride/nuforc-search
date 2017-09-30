@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 import {HitResult} from "../hit-result";
 import {ActivatedRoute} from "@angular/router";

@@ -1,3 +1,8 @@
-<p>
-  encounter works!
-</p>
+<div class="search-result" >
+  <table>
+    <tr><td>Date/Time</td><td>{{encounter._source.date_time}}</td></tr>
+    <tr><td>Location</td><td>{{encounter._source.city}},&#32;{{encounter._source.state}}</td></tr>
+    <tr><td>Shape</td><td>{{encounter._source.shape}}</td></tr>
+    <tr><td>Description</td>{{encounter._source.description}}</tr>
+  </table>
+</div>

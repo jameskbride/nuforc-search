@@ -21,7 +21,7 @@ export class NuforcSearchService {
   }
 
   getEncounter(id: string): Observable<HitResult> {
-    const url = `/api/encounters/${id}`;
+    const url = `/api/encounters/encounter/${id}`;
     let query = `${url}`;
 
     return this.http.get<HitResult>(query);
