@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {NuforcSearchService } from './nuforc-search.service';
 import 'rxjs/add/operator/toPromise';
-import {HitResult} from "./hit-result";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -9,15 +9,11 @@ import {HitResult} from "./hit-result";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  encounters: HitResult[];
-
-  constructor(private nuforcSearchService: NuforcSearchService) {}
   title = 'app sort of works!';
 
+  constructor(private router: Router) {}
 
   search(queryString : string): void {
-    this.nuforcSearchService.search(queryString).subscribe((res) => {
-      this.encounters = res.hits.hits;
-    });
+    this.router.navigate(['./search'], {queryParams: {query: queryString}});
   }
 }
