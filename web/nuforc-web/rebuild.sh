@@ -6,6 +6,6 @@ fi
 
 rm -rf staging/*
 
-ng build
+ng build --target=production --environment=prod
 
 cp dist/* staging/

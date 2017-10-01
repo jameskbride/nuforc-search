@@ -9,7 +9,7 @@
           <tr><td>Date/Time</td><td>{{encounter._source.date_time}}</td></tr>
           <tr><td>Location</td><td>{{encounter._source.city}},&#32;{{encounter._source.state}}</td></tr>
           <tr><td>Shape</td><td>{{encounter._source.shape}}</td></tr>
-          <tr><td>Summary</td>{{encounter._source.summary}}</tr>
+          <tr><td>Summary</td><span id="encounter-summary">{{encounter._source.summary}}</span></tr>
         </table>
         <div><a routerLink="../encounter/{{encounter._id}}">View</a> </div>
       </div>
