@@ -8,6 +8,8 @@ import {HttpClientModule} from '@angular/common/http'
 import {RouterModule, Routes} from '@angular/router';
 import { EncounterComponent } from './encounter/encounter.component';
 import { SearchComponent } from './search/search.component';
+import { ShapeAggregatorComponent } from './shape-aggregator/shape-aggregator.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 const appRoutes: Routes = [
   {
@@ -21,16 +23,19 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
+  bootstrap: [AppComponent],
   declarations: [
     AppComponent,
     EncounterComponent,
-    SearchComponent
+    SearchComponent,
+    ShapeAggregatorComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     HttpClientModule,
+    NgbModule.forRoot(),
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only
@@ -39,8 +44,7 @@ const appRoutes: Routes = [
   exports: [
     RouterModule
   ],
-  providers: [NuforcSearchService, HttpClientModule],
-  bootstrap: [AppComponent]
+  providers: [NuforcSearchService, HttpClientModule]
 })
 
 export class AppModule { }
