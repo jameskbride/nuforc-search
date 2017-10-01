@@ -1,3 +1,3 @@
-<p>
-  shape-aggregator works!
-</p>
+<ul>
+  <li *ngFor="let bucket of buckets" class="bucket">{{bucket.key}}: {{bucket.doc_count}}</li>
+</ul>

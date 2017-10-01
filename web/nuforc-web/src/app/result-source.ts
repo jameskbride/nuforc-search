@@ -7,4 +7,5 @@ export interface ResultSource {
   duration: string,
   summary: string,
   posted_date: string,
-  description: string}
+  description: string
+}

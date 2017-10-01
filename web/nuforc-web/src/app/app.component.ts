@@ -9,11 +9,13 @@ import {Router} from "@angular/router";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app sort of works!';
+  query?: string;
+  title = 'Search for UFO Encounters';
 
   constructor(private router: Router) {}
 
   search(queryString : string): void {
+    this.query = queryString;
     this.router.navigate(['./search'], {queryParams: {query: queryString}});
   }
 }

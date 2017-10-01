@@ -3,11 +3,12 @@ import {SearchResult} from "./search-result";
 import {HttpClient, HttpParams} from "@angular/common/http"
 import {Observable} from "rxjs/Observable";
 import {HitResult} from "./hit-result";
+import {ComplexSearch} from "./complex-search";
+import {ComplexSearchResult} from "./complex-search-result";
+import {RequestOptions, ResponseContentType} from "@angular/http";
 
 @Injectable()
 export class NuforcSearchService {
-  hits: HitResult[];
-
 
   constructor(private http: HttpClient) { }
 
@@ -20,18 +21,17 @@ export class NuforcSearchService {
     });
   }
 
+  complexSearch(searchParams: ComplexSearch): Observable<ComplexSearchResult> {
+    const searchUrl = '/api/encounters/_search';
+
+    console.log(searchParams.query.match.description);
+    return this.http.post<ComplexSearchResult>(searchUrl, searchParams);
+  }
+
   getEncounter(id: string): Observable<HitResult> {
     const url = `/api/encounters/encounter/${id}`;
     let query = `${url}`;
 
     return this.http.get<HitResult>(query);
-  }
-
-  setEncounters(hits: HitResult[]) {
-    this.hits = hits;
-  }
-
-  getEncounters(): HitResult[] {
-    return this.hits;
   }
 }
