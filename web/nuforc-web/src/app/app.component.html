@@ -1,7 +1,9 @@
 <h1>
   {{title}}
 </h1>
-<input #searchBox id="search-box" value="{{query}}"/><button id="search-button" (click)="search(searchBox.value)" >Search</button>
+<input #searchBox id="search-box" value="{{query}}"/>
+<button id="search-button" (click)="search(searchBox.value)" >Search</button>
+<a routerLink="./add-encounter"><button id="report-encounter" aria-label="Add" value="Add">Add</button></a>
 <div>
   <router-outlet></router-outlet>
 </div>

@@ -10,11 +10,16 @@ import { EncounterComponent } from './encounter/encounter.component';
 import { SearchComponent } from './search/search.component';
 import { ShapeAggregatorComponent } from './shape-aggregator/shape-aggregator.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { AddEncounterComponent } from './add-encounter/add-encounter.component';
 
 const appRoutes: Routes = [
   {
     path: 'encounter/:id',
     component: EncounterComponent
+  },
+  {
+    path: 'add-encounter',
+    component: AddEncounterComponent
   },
   {
     path: 'search',
@@ -28,7 +33,8 @@ const appRoutes: Routes = [
     AppComponent,
     EncounterComponent,
     SearchComponent,
-    ShapeAggregatorComponent
+    ShapeAggregatorComponent,
+    AddEncounterComponent
   ],
   imports: [
     BrowserModule,

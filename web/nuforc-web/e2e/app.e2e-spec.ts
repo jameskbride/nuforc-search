@@ -1,5 +1,5 @@
 import { NuforcWebPage } from './app.po';
-import {browser, by, element} from "protractor";
+import {by, element} from "protractor";
 
 describe('nuforc-web App', () => {
   let page: NuforcWebPage;
