@@ -22,7 +22,7 @@
         "styles.css"
       ],
       "scripts": [
-        "../node_modules/mockserver-grunt/index.js"
+        "../node_modules/mockserver-client/mockServerClient.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

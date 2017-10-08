@@ -28,7 +28,7 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent, AddEncounterComponent],
   declarations: [
     AppComponent,
     EncounterComponent,

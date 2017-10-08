@@ -1,15 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import {Encounter} from "./encounter";
 
 @Component({
-  selector: 'app-add-encounter',
+  selector: 'add-encounter',
   templateUrl: './add-encounter.component.html',
   styleUrls: ['./add-encounter.component.css']
 })
-export class AddEncounterComponent implements OnInit {
+export class AddEncounterComponent {
 
-  constructor() { }
+  model: Encounter;
 
-  ngOnInit() {
+  constructor() {
+    this.model = new Encounter();
   }
 
+  submit() {
+
+  }
 }
