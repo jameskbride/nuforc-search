@@ -11,6 +11,7 @@ import { SearchComponent } from './search/search.component';
 import { ShapeAggregatorComponent } from './shape-aggregator/shape-aggregator.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AddEncounterComponent } from './add-encounter/add-encounter.component';
+import {EncounterService} from "./encounter.service";
 
 const appRoutes: Routes = [
   {
@@ -50,7 +51,7 @@ const appRoutes: Routes = [
   exports: [
     RouterModule
   ],
-  providers: [NuforcSearchService, HttpClientModule]
+  providers: [NuforcSearchService, EncounterService, HttpClientModule]
 })
 
 export class AppModule { }

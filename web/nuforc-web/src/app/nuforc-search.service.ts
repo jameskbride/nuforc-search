@@ -7,6 +7,8 @@ import {ComplexSearch} from "./complex-search";
 import {ComplexSearchResult} from "./complex-search-result";
 import {RequestOptions, ResponseContentType} from "@angular/http";
 import {environment} from "../environments/environment";
+import {Encounter} from "./add-encounter/encounter";
+import {ReportEncounterResponse} from "./ReportEncounterResponse";
 
 @Injectable()
 export class NuforcSearchService {
@@ -26,7 +28,8 @@ export class NuforcSearchService {
     const searchUrl = environment.BASE_URL + '/encounters/_search';
 
     console.log(searchParams.query.match.description);
-    return this.http.post<ComplexSearchResult>(searchUrl, searchParams);
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    return this.http.post<ComplexSearchResult>(searchUrl, searchParams, headers);
   }
 
   getEncounter(id: string): Observable<HitResult> {
@@ -35,4 +38,6 @@ export class NuforcSearchService {
 
     return this.http.get<HitResult>(query);
   }
+
+
 }

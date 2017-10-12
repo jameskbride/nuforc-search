@@ -22,7 +22,6 @@ export class SearchComponent {
   buckets: Bucket[];
   searchResults: Observable<ComplexSearchResult>;
   encounters: HitResult[];
-  title = 'app sort of works!';
   constructor(private route: ActivatedRoute, private nuforcSearchService: NuforcSearchService) {
     route.queryParams.subscribe(params => {
       let matchOnDescription = new MatchOnDescription(params.query);

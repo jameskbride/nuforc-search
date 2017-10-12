@@ -6,8 +6,10 @@ import {browser, by, element} from "protractor";
 describe('adding an encounter', () => {
 
   let page: NuforcWebPage;
+  let mockServerClient:any;
 
   beforeEach(() => {
+    mockServerClient = mockserver.mockServerClient('localhost', 9200);
     page = new NuforcWebPage();
     page.navigateTo();
   });
@@ -19,8 +21,8 @@ describe('adding an encounter', () => {
   });
 
   it('can add a new encounter', () => {
-    let expectedAddReportRequest:any;
-    expectedAddReportRequest = {
+    let expectedAddReportBody:any;
+    expectedAddReportBody = {
       dateTime: '10/08/2017',
       city: 'Columbus',
       state: 'OH',
@@ -30,44 +32,60 @@ describe('adding an encounter', () => {
       description: 'cigar shaped ufo'
     };
     let expectedAddReportStatusCode = 200;
-    setAddReportExpectation(expectedAddReportRequest, expectedAddReportStatusCode);
+    let expectedAddReportRequest = buildAddReportRequest(expectedAddReportBody);
+    setAddReportExpectation(expectedAddReportRequest, expectedAddReportStatusCode, mockServerClient);
 
-    let expectedSearchRequest = buildSearchRequest(expectedAddReportRequest.description);
-    let expectedSearchResponse = buildSearchResponse(200, buildSearchBody(expectedAddReportRequest));
-    setSearchExpectation(expectedSearchRequest, expectedSearchResponse);
+    let expectedSearchRequest = buildSearchRequest(expectedAddReportBody.description);
+    let expectedSearchResponse = buildSearchResponse(200, buildSearchBody(expectedAddReportBody));
+    setSearchExpectation(expectedSearchRequest, expectedSearchResponse, mockServerClient);
 
     element(by.css('#report-encounter')).click();
 
-    element(by.css('#date-time')).sendKeys(expectedAddReportRequest.dateTime);
-    element(by.css('#city')).sendKeys(expectedAddReportRequest.city);
-    element(by.css('#state')).sendKeys(expectedAddReportRequest.state);
-    element(by.css('#shape')).sendKeys(expectedAddReportRequest.shape);
-    element(by.css('#duration')).sendKeys(expectedAddReportRequest.duration);
-    element(by.css('#summary')).sendKeys(expectedAddReportRequest.summary);
-    element(by.css('#description')).sendKeys(expectedAddReportRequest.description);
+    element(by.css('#date-time')).sendKeys(expectedAddReportBody.dateTime);
+    element(by.css('#city')).sendKeys(expectedAddReportBody.city);
+    element(by.css('#state')).sendKeys(expectedAddReportBody.state);
+    element(by.css('#shape')).sendKeys(expectedAddReportBody.shape);
+    element(by.css('#duration')).sendKeys(expectedAddReportBody.duration);
+    element(by.css('#summary')).sendKeys(expectedAddReportBody.summary);
+    element(by.css('#description')).sendKeys(expectedAddReportBody.description);
     element(by.css('#submit')).click();
 
-    element(by.css('#search-box')).sendKeys(expectedAddReportRequest.description);
+    element(by.css('#search-box')).sendKeys(expectedAddReportBody.description);
     element(by.css('#search-button')).click();
-    expect(element(by.css('#encounter-summary')).getText()).toEqual(expectedAddReportRequest.summary);
+
+    expect(element(by.css('#encounter-summary')).getText()).toEqual(expectedAddReportBody.summary);
   });
 });
 
-let setAddReportExpectation = (expectedRequest: any, responseStatusCode: number, expectedResponseBody:any = {}) =>  {
-  let mockServerClient = mockserver.mockServerClient;
-  mockServerClient('localhost', 9200).mockAnyResponse(
+let buildAddReportRequest = (expectedBody:any) => {
+  return {
+    method: 'POST',
+    path: '/report',
+    body: {
+      type: 'JSON',
+      matchType: 'STRICT',
+      json: JSON.stringify(expectedBody)
+    }
+  };
+};
+
+let setAddReportExpectation = (expectedRequest: any, responseStatusCode: number, mockServerClient:any, expectedResponseBody:any = {}) =>  {
+
+  mockServerClient.mockAnyResponse(
     {
-      httpRequest: {
-        method: 'POST',
-        path: '/report',
-        body: {
-          type: 'JSON',
-          matchType: 'STRICT',
-          json: JSON.stringify(expectedRequest)
-        }
-      },
+      httpRequest: expectedRequest,
       httpResponse: {
         statusCode: responseStatusCode,
+        headers: [
+          {
+            name: "Content-Type",
+            values: ["application/json; charset=utf-8"]
+          },
+          {
+            name: "Access-Control-Allow-Origin",
+            values: ["*"]
+          }
+        ],
         body: JSON.stringify(expectedResponseBody)
       },
       times: {
@@ -166,9 +184,8 @@ let buildSearchResponse = (statusCode:number, body:any):any => {
   }
 };
 
-let setSearchExpectation = (request:any, response:any):any => {
-  let mockServerClient = mockserver.mockServerClient;
-  mockServerClient('localhost', 9200).mockAnyResponse(
+let setSearchExpectation = (request:any, response:any, mockServerClient:any):any => {
+  mockServerClient.mockAnyResponse(
     {
       httpRequest: request,
       httpResponse: response,
