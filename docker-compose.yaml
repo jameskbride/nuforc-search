@@ -3,7 +3,7 @@ version: '2'
 services:
   elasticsearch:
     container_name: nuforc-elasticsearch
-    image: jameskbride/elasticsearch
+    image: nuforc-elasticsearch/latest
     volumes:
       - ./esdata:/usr/share/elasticsearch/data
     build:
@@ -11,27 +11,3 @@ services:
     ports:
       - "9200:9200"
       - "9300:9300"
-    networks:
-      - back
-
-  web:
-    container_name: nuforc-nginx
-    image: jameskbride/nuforc-web-nginx
-    volumes:
-      - ./web/nuforc-web/staging:/usr/share/nginx/html
-    build:
-      context: ./web
-    ports:
-      - "80:80"
-      - "8080:8080"
-    networks:
-      - front
-      - back
-
-networks:
-  front:
-    # Use a custom driver
-    driver: bridge
-  back:
-    # Use a custom driver
-    driver: bridge
