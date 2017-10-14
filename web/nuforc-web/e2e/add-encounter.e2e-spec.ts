@@ -136,7 +136,7 @@ let buildSearchBody = (resultData:any) => {
         {
           "_index": "encounters",
           "_type": "encounter",
-          "_id": "12345",
+          "_id": "AV1stsC55J77fbpnTxoD",
           "_score": 0.3627423,
           "_source": {
             "url": "",
