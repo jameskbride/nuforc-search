@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# $1 should be the server location (http://localhost:9200 for development)
 curl -X PUT -H "Content-Type: application/json" -H "Cache-Control: no-cache" -H "Postman-Token: 364165c1-aaf5-e8da-8dde-1f119fde150b" -d '{
 	"mappings": {
 		"encounter": {
@@ -8,25 +9,32 @@ curl -X PUT -H "Content-Type: application/json" -H "Cache-Control: no-cache" -H 
 					"type": "string"
 				},
 				"date_time": {
-					"type": "string"
+					"type": "string",
+					"fielddata": true
 				},
 				"state": {
-					"type": "string"
+					"type": "string",
+					"fielddata": true
 				},
 				"shape": {
-					"type": "string"
+					"type": "string",
+					"fielddata": true
 				},
 				"duration": {
-					"type": "string"
+					"type": "string",
+					"fielddata": true
 				},
 				"summary": {
-					"type": "string"
+					"type": "string",
+					"fielddata": true
 				},
 				"posted_date": {
-					"type": "string"
+					"type": "string",
+					"fielddata": true
 				},
 				"description": {
-					"type": "string"
+					"type": "string",
+					"fielddata": true
 				}
 			}
 		}

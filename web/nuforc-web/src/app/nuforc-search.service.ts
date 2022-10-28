@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {SearchResult} from "./search-result";
-import {HttpClient, HttpParams} from "@angular/common/http"
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http"
 import {Observable} from "rxjs/Observable";
 import {HitResult} from "./hit-result";
 import {ComplexSearch} from "./complex-search";
@@ -28,8 +28,8 @@ export class NuforcSearchService {
     const searchUrl = environment.BASE_URL + '/encounters/_search';
 
     console.log(searchParams.query.match.description);
-    const headers = new Headers({ 'Content-Type': 'application/json' });
-    return this.http.post<ComplexSearchResult>(searchUrl, searchParams, headers);
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post<ComplexSearchResult>(searchUrl, searchParams, {headers: headers});
   }
 
   getEncounter(id: string): Observable<HitResult> {
