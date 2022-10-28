@@ -6,6 +6,6 @@ fi
 
 rm -rf staging/*
 
-ng build --target=production --environment=prod
+yarn run build --target=production --environment=prod
 
 cp dist/* staging/
