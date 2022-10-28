@@ -11,7 +11,7 @@ export class EncounterService {
   constructor(private http: HttpClient) { }
 
   reportEncounter(encounter:Encounter): Observable<ReportEncounterResponse> {
-    const reportUrl = environment.BASE_URL + '/report';
+    const reportUrl = environment.BASE_URL + '/encounters/encounter';
 
     return this.http.post<ReportEncounterResponse>(reportUrl, encounter);
   }
